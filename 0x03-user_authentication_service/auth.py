@@ -48,3 +48,14 @@ class Auth:
             return checkpw(password=password.encode(),
                            hashed_password=usr.hashed_password)
 
+    def create_session(self, email: str) -> str:
+        """return the session id
+        """
+        try:
+            usr = self._db.find_user_by(email=email)
+        except NoResultFound:
+            return None
+        else:
+            usr.session_id = _generate_uuid()
+            return usr.session_id
+
