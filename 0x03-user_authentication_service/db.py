@@ -53,3 +53,13 @@ class DB:
             raise NoResultFound
         return query
 
+    def update_user(self, user_id: int, **args) -> None:
+        """update user
+        """
+        usr = self.find_user_by(id=user_id)
+        for i in args.keys():
+            if i not in User.__table__.columns.keys():
+                raise ValueError
+        for k, v in args.items():
+            setattr(usr, k, v)
+        self._session.commit()
