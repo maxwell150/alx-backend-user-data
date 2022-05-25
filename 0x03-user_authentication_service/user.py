@@ -18,8 +18,7 @@ class User(Base):
     session_id = Column(String(250))
     reset_token = Column(String(250))
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """attributes"""
         return "<User(name='%s', email='%s', session_id='%s')>" % (
                              self.name, self.email, self.session_id)
-
