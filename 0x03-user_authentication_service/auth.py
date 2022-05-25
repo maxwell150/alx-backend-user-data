@@ -71,4 +71,12 @@ class Auth:
         else:
             return usr
 
+    def destroy_session(self, user_id: int) -> None:
+        """takes a single user_id integer argument and returns None.
+        """
+        try:
+            usr = self._db.find_user_by(id=user_id)
+        except NoResultFound:
+            return None
+        usr.session_id = None
 
